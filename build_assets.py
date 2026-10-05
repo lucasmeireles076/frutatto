@@ -23,7 +23,11 @@ SRC = os.path.join(ROOT, "asset")
 OUT = os.path.join(ROOT, "site", "img")
 SHARP_NEAR = 150  # Laplacian variance below this = out-of-focus leaf
 PRODUCTS = ["granola", "caju", "acai"]
-FILE_ALIASES = {"caju": ["caju.png", "caju_suco.png"], "granola": ["granola.png"], "acai": ["acai.png", "açaí.png", "acai_suco.png"]}
+FILE_ALIASES = {
+    "caju": ["caju.png", "caju_suco.png"], "granola": ["granola.png"],
+    "acai": ["acai.png", "açaí.png", "acai_suco.png"],
+    "uva": ["uva.png", "uva_suco.png"], "caja": ["caja.png", "cajá.png", "caja_suco.png"],
+}
 
 
 def export(img, name, widths, q_avif=55, q_webp=80):
@@ -37,6 +41,40 @@ def export(img, name, widths, q_avif=55, q_webp=80):
         im.save(os.path.join(OUT, f"{name}-{t}.avif"), quality=q_avif, speed=4)
         im.save(os.path.join(OUT, f"{name}-{t}.webp"), quality=q_webp, method=6)
     return list(widths)
+
+
+# Flavor variants of the same art (Frutatt posts: Uva = purple, Cajá = teal).
+# Only the background art is recolored; product photos are never synthesized.
+# base = flat background, letters = brush lettering, rings = the dark concentric rings.
+THEMES = {
+    "uva":  {"base": "#5B2D8E", "letters": "#8E63C4", "rings": "#3E1A6A"},
+    "caja": {"base": "#1F9C99", "letters": "#5CC8C2", "rings": "#0E6B6A"},
+    # no official art yet — color stand-ins for the catalog cards
+    "granola": {"base": "#C98B3E", "letters": "#DDA75E", "rings": "#99601F"},
+    "acai":    {"base": "#3A1240", "letters": "#5A2A62", "rings": "#22072A"},
+}
+
+
+def _lab(hex_):
+    px = np.array([[[int(hex_[i:i + 2], 16) / 255 for i in (1, 3, 5)]]], np.float32)
+    return cv2.cvtColor(px, cv2.COLOR_RGB2LAB)[0, 0]
+
+
+def recolor(img, palette):
+    """Repaint the yellow/orange art in another palette, keeping its paper grain.
+    Measured on bg.png (Lab): background L~85.5, brush letters L~92, ring orange a>40."""
+    rgb = np.asarray(img, np.float32) / 255
+    lab = cv2.cvtColor(rgb, cv2.COLOR_RGB2LAB)
+    smooth = cv2.GaussianBlur(lab, (0, 0), 3)
+    grain = lab[..., 0] - smooth[..., 0]
+    k_letter = np.clip((smooth[..., 0] - 87) / 4.5, 0, 1)[..., None]
+    k_ring = np.clip((smooth[..., 1] - 8) / 37, 0, 1)[..., None]
+    base, letters, rings = (_lab(palette[k]) for k in ("base", "letters", "rings"))
+    out = base + k_ring * (rings - base)
+    out = out + k_letter * (letters - out)
+    out[..., 0] += grain * 1.1
+    rgb = cv2.cvtColor(out.astype(np.float32), cv2.COLOR_LAB2RGB)
+    return Image.fromarray((np.clip(rgb, 0, 1) * 255).astype(np.uint8))
 
 
 def split_background():
@@ -80,6 +118,11 @@ def split_background():
     # the orange concentric-circle band (bottom of the art) is reused as the products "floor"
     band = plate_img.crop((0, round(H * 0.70), W, H))
     export(band, "band", [960, 1920])
+
+    for flavor, palette in THEMES.items():
+        themed = recolor(plate_img, palette)
+        export(themed, f"bg-{flavor}", [960, 1440, 1920])
+        export(themed.crop((0, round(H * 0.70), W, H)), f"band-{flavor}", [960, 1920])
 
     # the two crispest leaves double as stable-named "ingredient" sprites for CSS
     for tag, lf in zip("ab", sorted(leaves, key=lambda l: -l["sharp"])[:2]):
@@ -134,7 +177,7 @@ def build_products():
     for key, im in find_products().items():
         im = im.crop(im.getchannel("A").getbbox())
         out[key] = {"widths": export(im, f"prod-{key}", [320, 520, 760]), "ratio": [im.width, im.height]}
-    for key in PRODUCTS:
+    for key in FILE_ALIASES:
         if key not in out:
             print(f"[skip] {key}: no source image in asset/ (placeholder will be shown)")
     return out
