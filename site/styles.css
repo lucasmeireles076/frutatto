@@ -1,0 +1,367 @@
+/* ───────── Tokens ───────── */
+:root {
+  --yellow: #FACD05;
+  --yellow-soft: #FBDB10;
+  --orange: #F26A1B;
+  --red: #E23A23;
+  --green: #1E8E3E;
+  --ink: #2B1205;
+  --ink-soft: #5A3517;
+  --cream: #FFF8E1;
+  --white: #FFFFFF;
+
+  --font-display: "Baloo 2", system-ui, sans-serif;
+  --font-body: "Figtree", system-ui, sans-serif;
+
+  /* Frutatt motion language — shared by CSS and main.js (expo.out ≈ --ease-out) */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --dur-hover: 420ms;
+
+  /* hero art plate: covers the viewport keeping the 1672×941 ratio of the original art */
+  --stage-w: max(100vw, calc(max(100svh, 640px) * 1.7768));
+  --stage-h: calc(var(--stage-w) * 0.5628);
+
+  color-scheme: light;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--yellow);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img { display: block; max-width: 100%; height: auto; }
+picture { display: block; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; font-family: var(--font-display); font-weight: 800; letter-spacing: -0.01em; }
+
+.skip {
+  position: absolute; left: 16px; top: -48px; z-index: 100;
+  padding: 10px 16px; border-radius: 999px;
+  background: var(--ink); color: var(--white); text-decoration: none; font-weight: 600;
+}
+.skip:focus { top: 12px; }
+:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; border-radius: 6px; }
+
+/* mouse offset — each depth layer reads its own --mx/--my via `translate`,
+   so it never fights the GSAP-owned `transform` on the same element */
+[data-depth], [data-leaves] {
+  translate: calc(var(--mx, 0) * 1px) calc(var(--my, 0) * 1px);
+}
+
+/* ───────── Nav ───────── */
+.nav {
+  position: absolute; inset: 0 0 auto 0; z-index: 20;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 20px clamp(16px, 4vw, 56px);
+}
+.nav__brand {
+  font-family: var(--font-display); font-weight: 800; font-size: 1.5rem;
+  color: var(--red); text-decoration: none; line-height: 1;
+}
+.nav nav { display: flex; gap: clamp(12px, 3vw, 32px); }
+.nav nav a {
+  font-weight: 600; font-size: 0.95rem; text-decoration: none; color: var(--ink);
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 2px; background-position: 0 100%; background-repeat: no-repeat;
+  transition: background-size 260ms var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .nav nav a:hover { background-size: 100% 2px; }
+}
+
+/* ───────── Shared ───────── */
+.eyebrow {
+  margin: 0 0 14px;
+  font-weight: 700; font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.line { display: block; overflow: hidden; padding-bottom: 0.06em; margin-bottom: -0.06em; }
+.word { display: inline-block; will-change: transform; }
+.accent { color: var(--red); }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  min-height: 52px; padding: 0 28px; border-radius: 999px;
+  background: var(--red); color: var(--white);
+  font-weight: 700; text-decoration: none;
+  box-shadow: 0 10px 24px -12px rgba(140, 30, 10, 0.7);
+  transition: transform 160ms var(--ease-out), background-color 200ms ease;
+}
+.btn:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover { background-color: #C92E19; }
+}
+
+/* soft contact shadow under each product; GSAP scales .shadow with the float,
+   CSS hover grows ::before — separate elements, no transform conflict */
+.shadow {
+  position: absolute; left: 50%; bottom: -3%; z-index: 0;
+  width: 64%; height: 7%; margin-left: -32%;
+  pointer-events: none;
+}
+.shadow::before {
+  content: ""; position: absolute; inset: 0; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(70, 25, 0, 0.42), rgba(70, 25, 0, 0));
+  opacity: 0.8;
+  transition: transform var(--dur-hover) var(--ease-out), opacity var(--dur-hover) ease;
+}
+
+/* ───────── Hero ───────── */
+.hero {
+  position: relative;
+  height: 100svh; min-height: 640px;
+  overflow: hidden;
+  isolation: isolate;
+}
+.hero__stage, .hero__near {
+  position: absolute; z-index: 0;
+  width: var(--stage-w); height: var(--stage-h);
+  left: calc(50% - var(--stage-w) / 2);
+  top: calc(50% - var(--stage-h) / 2);
+  pointer-events: none;
+}
+.hero__near { z-index: 3; }
+.hero__stage picture { position: absolute; inset: -1%; }
+.hero__plate { width: 100%; height: 100%; object-fit: cover; }
+.hero__leaves { position: absolute; inset: 0; }
+
+.leaf { position: absolute; display: block; will-change: transform; }
+.leaf img { width: 100%; height: 100%; }
+
+/* no z-index here on purpose: copy can sit above the near-camera leaves, the bottle below them */
+.hero__grid {
+  position: relative;
+  height: 100%;
+  max-width: 1320px; margin: 0 auto;
+  padding: 96px clamp(16px, 4vw, 56px) 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) auto minmax(0, 0.8fr);
+  align-items: center;
+  gap: clamp(16px, 3vw, 48px);
+}
+.hero__copy { position: relative; z-index: 4; }
+.hero__facts { position: relative; z-index: 4; }
+.hero__title {
+  font-size: clamp(3rem, 5.4vw, 5.6rem);
+  line-height: 0.9;
+  margin-bottom: 22px;
+}
+.hero__lead { max-width: 30ch; margin: 0 0 28px; font-size: 1.125rem; color: var(--ink-soft); }
+
+.hero__product {
+  position: relative; z-index: 2; align-self: end;
+  height: min(78svh, 800px);
+  aspect-ratio: 757 / 1437;
+  margin-bottom: 4svh;
+}
+.hero__float, .hero__float picture, .hero__float img { width: 100%; height: 100%; }
+.hero__float { position: relative; z-index: 1; }
+
+.hero__facts {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; gap: 12px; justify-items: end;
+}
+.hero__facts li {
+  display: inline-flex; align-items: baseline; gap: 8px;
+  padding: 10px 18px; border-radius: 999px;
+  background: var(--white);
+  font-weight: 600; color: var(--ink-soft);
+  box-shadow: 0 8px 20px -14px rgba(90, 40, 0, 0.6);
+}
+.hero__facts strong { font-family: var(--font-display); font-size: 1.35rem; color: var(--red); line-height: 1; }
+
+/* ───────── Products ───────── */
+.products {
+  position: relative;
+  padding: clamp(72px, 9vw, 120px) 0 0;
+  overflow: hidden;
+  isolation: isolate;
+}
+.products__bgword {
+  position: absolute; left: 50%; top: 18%; z-index: -2;
+  margin-left: -50vw; width: 100vw; text-align: center;
+  font-family: var(--font-display); font-weight: 800;
+  font-size: 27vw; line-height: 0.8; letter-spacing: -0.03em;
+  color: rgba(255, 236, 120, 0.55);
+  user-select: none;
+}
+.products__head { text-align: center; padding: 0 16px; margin-bottom: clamp(24px, 4vw, 56px); }
+.products__title { font-size: clamp(2.4rem, 5vw, 4.8rem); line-height: 0.95; }
+
+.products__row {
+  position: relative; z-index: 2;
+  max-width: 1180px; margin: 0 auto;
+  padding: 24px clamp(16px, 4vw, 56px) clamp(64px, 8vw, 120px);
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 4vw, 64px);
+  align-items: end;
+}
+.prod { position: relative; display: grid; justify-items: center; gap: 18px; }
+.prod__depth { position: relative; height: min(50svh, 480px); max-width: 100%; aspect-ratio: 757 / 1437; }
+.prod__float { position: relative; z-index: 1; width: 100%; height: 100%; }
+.prod__img { position: relative; z-index: 1; width: 100%; height: 100%;
+  transition: transform var(--dur-hover) var(--ease-out); }
+.prod__img img { width: 100%; height: 100%; object-fit: contain; }
+
+.prod__name {
+  position: relative;
+  font-size: clamp(1.6rem, 2.4vw, 2.2rem); line-height: 1;
+  color: var(--ink);
+  transition: color 240ms ease;
+}
+.prod__name::after {
+  content: ""; position: absolute; left: 10%; right: 10%; bottom: -8px; height: 3px;
+  border-radius: 3px; background: currentColor;
+  transform: scaleX(0); transform-origin: center;
+  transition: transform 320ms var(--ease-out);
+}
+
+/* ingredients orbiting each product — drift uses `translate`/`rotate`
+   (CSS keyframes), hover reaction uses `transform`, so both compose */
+.prod__leaf {
+  position: absolute; z-index: 2; pointer-events: none;
+  width: 26%; aspect-ratio: 1;
+  background: url("img/ingredient-a-160.webp") center / contain no-repeat;
+  background-image: image-set(url("img/ingredient-a-160.avif") type("image/avif"), url("img/ingredient-a-160.webp") type("image/webp"));
+  animation: leaf-drift 6.5s ease-in-out infinite alternate;
+  transition: transform var(--dur-hover) var(--ease-out);
+}
+.prod__leaf--a { left: -14%; top: 22%; rotate: -24deg; }
+.prod__leaf--b {
+  right: -12%; top: 48%; width: 20%; animation-duration: 7.4s; animation-delay: -2s; rotate: 140deg;
+  background-image: url("img/ingredient-b-160.webp");
+  background-image: image-set(url("img/ingredient-b-160.avif") type("image/avif"), url("img/ingredient-b-160.webp") type("image/webp"));
+}
+@keyframes leaf-drift {
+  from { translate: 0 0; }
+  to   { translate: 4px -10px; }
+}
+
+/* missing product art → clean placeholder silhouette until the PNG is dropped in asset/ */
+.prod.is-missing .prod__img { visibility: hidden; }
+.prod.is-missing .prod__float::after {
+  content: "Imagem em breve";
+  position: absolute; inset: 10% 18% 2%; z-index: 1;
+  display: grid; place-items: center; text-align: center;
+  border-radius: 42% 42% 18% 18% / 18% 18% 8% 8%;
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.12));
+  border: 2px dashed rgba(90, 53, 23, 0.25);
+  font-weight: 600; font-size: 0.9rem; color: var(--ink-soft);
+}
+
+.products__band {
+  position: relative; z-index: 1;
+  margin-top: calc(-1 * clamp(140px, 16vw, 260px));
+  margin-bottom: -28px; /* bleed past the section edge so the ±20px parallax never exposes a gap */
+}
+.products__band picture {
+  width: 100%;
+  /* hide the crop seam: the band melts into the section yellow */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 22%);
+          mask-image: linear-gradient(to bottom, transparent 0, #000 22%);
+}
+.products__band img { width: 100%; min-height: 200px; object-fit: cover; object-position: top; }
+.products__near { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+
+@media (hover: hover) and (pointer: fine) {
+  .products__row:has(.prod:hover) .prod:not(:hover) .prod__img { opacity: 0.82; }
+  .prod__img { transition: transform var(--dur-hover) var(--ease-out), opacity 300ms ease; }
+  .prod:hover .prod__img { transform: translateY(-14px) scale(1.045); }
+  .prod:hover .shadow::before { transform: scale(1.12, 1.25); opacity: 1; }
+  .prod:hover .prod__name { color: var(--red); }
+  .prod:hover .prod__name::after { transform: scaleX(1); }
+  .prod:hover .prod__leaf--a { transform: translate(-10px, -8px) rotate(-10deg); }
+  .prod:hover .prod__leaf--b { transform: translate(10px, -6px) rotate(12deg); }
+}
+
+/* ───────── Why ───────── */
+.why {
+  position: relative; z-index: 2;
+  background: var(--red); color: var(--white);
+  padding: clamp(72px, 9vw, 128px) clamp(16px, 4vw, 56px);
+  text-align: center;
+}
+.why__title { font-size: clamp(2.2rem, 4.6vw, 4rem); line-height: 1; margin-bottom: clamp(32px, 5vw, 64px); }
+.why__list {
+  list-style: none; margin: 0 auto; padding: 0; max-width: 1080px;
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px;
+}
+.why__item {
+  display: grid; gap: 4px; padding: 28px 16px; border-radius: 28px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+}
+.why__item strong { font-family: var(--font-display); font-size: clamp(2.2rem, 4vw, 3.2rem); line-height: 1; color: var(--yellow); }
+.why__item span { font-weight: 600; }
+.why__note { margin: 32px 0 0; font-size: 0.85rem; opacity: 0.8; }
+
+.footer {
+  background: var(--ink); color: rgba(255, 255, 255, 0.75);
+  text-align: center; padding: 28px 16px; font-size: 0.9rem;
+}
+.footer p { margin: 0; }
+
+/* ───────── Pre-motion states (only while JS is driving the intro) ───────── */
+.js [data-intro],
+.js .hero__title,
+.js .hero__product picture,
+.js .hero .leaf,
+.js .products__title,
+.js .prod,
+.js [data-reveal] { opacity: 0; }
+
+/* ───────── Tablet ───────── */
+@media (max-width: 1024px) {
+  .hero__grid { grid-template-columns: minmax(0, 1.1fr) auto; }
+  .hero__facts { display: none; }
+  .hero__product { height: min(66svh, 640px); }
+  .why__list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* ───────── Mobile ───────── */
+@media (max-width: 767px) {
+  .nav { padding: 16px; }
+  .nav nav a:last-child { display: none; }
+  .hero { height: auto; min-height: 100svh; }
+  .hero__grid {
+    grid-template-columns: 1fr;
+    padding: 88px 16px 0;
+    align-items: start;
+    gap: 8px;
+  }
+  .hero__copy { text-align: center; }
+  .hero__title { font-size: clamp(2.6rem, 12.5vw, 3.6rem); margin-bottom: 14px; }
+  .hero__lead { margin: 0 auto 20px; font-size: 1rem; }
+  .hero__product { justify-self: center; height: min(54svh, 460px); margin: 8px 0 3svh; }
+
+  .products__row {
+    display: flex; gap: 8px;
+    overflow-x: auto; overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory; scroll-padding-inline: 18vw;
+    padding: 32px 18vw 72px;
+    scrollbar-width: none;
+  }
+  .products__row::-webkit-scrollbar { display: none; }
+  .prod { flex: 0 0 64vw; scroll-snap-align: center; }
+  .prod__depth { height: min(56svh, 420px); }
+  .products__band { margin-top: -150px; }
+  .why__item { padding: 22px 12px; border-radius: 22px; }
+}
+
+/* ───────── Reduced motion: keep fades, drop movement ───────── */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .prod__leaf { animation: none; }
+  .prod__img, .prod__leaf, .shadow::before, .prod__name::after { transition-property: opacity; }
+  .prod:hover .prod__img, .prod:hover .prod__leaf--a, .prod:hover .prod__leaf--b { transform: none; }
+  .prod__name::after { transform: scaleX(1); opacity: 0; transition: opacity 200ms ease; }
+  .prod:hover .prod__name::after { opacity: 1; }
+}

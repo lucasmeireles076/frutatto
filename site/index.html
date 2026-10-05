@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Suco Frutatt — Fruta de verdade</title>
+  <meta name="description" content="Suco Frutatt: 28% de fruta, sem conservantes e fonte de vitamina C. Conheça os sabores Granola, Caju e Açaí.">
+  <meta name="theme-color" content="#FACD05">
+  <script>document.documentElement.classList.add('js')</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- LCP: hero plate + product, preloaded at the right size -->
+  <link rel="preload" as="image" type="image/avif"
+        imagesrcset="img/bg-960.avif 960w, img/bg-1440.avif 1440w, img/bg-1920.avif 1672w" imagesizes="max(100vw, 178svh)">
+  <link rel="preload" as="image" type="image/avif"
+        imagesrcset="img/prod-caju-320.avif 320w, img/prod-caju-520.avif 520w, img/prod-caju-760.avif 757w" imagesizes="(max-width: 767px) 52vw, 400px">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="nav">
+    <a class="nav__brand" href="#topo" aria-label="Suco Frutatt — início">Suco Frutatt</a>
+    <nav aria-label="Principal">
+      <a href="#sabores">Sabores</a>
+      <a href="#por-que">Por que Frutatt</a>
+    </nav>
+  </header>
+
+  <main id="conteudo">
+    <!-- ───────── HERO ───────── -->
+    <section class="hero" id="topo" aria-labelledby="hero-title">
+      <div class="hero__stage" data-depth="bg" aria-hidden="true">
+        <picture>
+          <source type="image/avif" srcset="img/bg-960.avif 960w, img/bg-1440.avif 1440w, img/bg-1920.avif 1672w" sizes="max(100vw, 178svh)">
+          <img class="hero__plate" src="img/bg-1440.webp"
+               srcset="img/bg-960.webp 960w, img/bg-1440.webp 1440w, img/bg-1920.webp 1672w" sizes="max(100vw, 178svh)"
+               width="1672" height="941" alt="" fetchpriority="high" decoding="async">
+        </picture>
+        <!-- leaves are cut out of the original art by build_assets.py and mounted by main.js -->
+        <div class="hero__leaves" data-leaves="far"></div>
+      </div>
+
+      <div class="hero__grid">
+        <div class="hero__copy">
+          <p class="eyebrow" data-intro="eyebrow">Suco Frutatt · Caju 300 ml</p>
+          <h1 id="hero-title" class="hero__title">
+            <span class="line"><span class="word">O</span> <span class="word">sabor</span></span>
+            <span class="line"><span class="word">do</span> <span class="word accent">caju,</span></span>
+            <span class="line"><span class="word">de</span> <span class="word">verdade.</span></span>
+          </h1>
+          <p class="hero__lead" data-intro="lead">28% de fruta, sem conservantes e fonte de vitamina C. Agite antes de beber.</p>
+          <a class="btn" href="#sabores" data-intro="cta">Conheça os sabores</a>
+        </div>
+
+        <div class="hero__product" data-depth="product">
+          <span class="shadow" aria-hidden="true"></span>
+          <div class="hero__float">
+            <picture>
+              <source type="image/avif" srcset="img/prod-caju-320.avif 320w, img/prod-caju-520.avif 520w, img/prod-caju-760.avif 757w" sizes="(max-width: 767px) 52vw, 400px">
+              <img src="img/prod-caju-520.webp"
+                   srcset="img/prod-caju-320.webp 320w, img/prod-caju-520.webp 520w, img/prod-caju-760.webp 757w" sizes="(max-width: 767px) 52vw, 400px"
+                   width="757" height="1437" alt="Garrafa de Suco Frutatt sabor Caju, 300 ml" fetchpriority="high" decoding="async">
+            </picture>
+          </div>
+        </div>
+
+        <ul class="hero__facts" aria-label="Destaques do rótulo">
+          <li data-intro="fact"><strong>28%</strong> de fruta</li>
+          <li data-intro="fact"><strong>0%</strong> açúcar</li>
+          <li data-intro="fact"><strong>Sem</strong> conservantes</li>
+        </ul>
+      </div>
+
+      <div class="hero__near" data-leaves="near" aria-hidden="true"></div>
+    </section>
+
+    <!-- ───────── PRODUTOS ───────── -->
+    <section class="products" id="sabores" aria-labelledby="sabores-title">
+      <div class="products__bgword" data-depth="bg" aria-hidden="true">Frutatt</div>
+
+      <header class="products__head">
+        <p class="eyebrow">A linha</p>
+        <h2 id="sabores-title" class="products__title">
+          <span class="line"><span class="word">Três</span> <span class="word">sabores,</span></span>
+          <span class="line"><span class="word">o</span> <span class="word">mesmo</span> <span class="word accent">frescor.</span></span>
+        </h2>
+      </header>
+
+      <div class="products__row" role="list">
+        <article class="prod" role="listitem" data-prod="granola" data-from="left" aria-labelledby="p-granola">
+          <div class="prod__depth" data-depth="product">
+            <span class="shadow" aria-hidden="true"></span>
+            <div class="prod__float">
+              <span class="prod__leaf prod__leaf--a" aria-hidden="true"></span>
+              <picture class="prod__img">
+                <source type="image/avif" srcset="img/prod-granola-320.avif 320w, img/prod-granola-520.avif 520w, img/prod-granola-760.avif 760w" sizes="(max-width: 767px) 62vw, 26vw">
+                <img src="img/prod-granola-520.webp" srcset="img/prod-granola-320.webp 320w, img/prod-granola-520.webp 520w, img/prod-granola-760.webp 760w"
+                     sizes="(max-width: 767px) 62vw, 26vw" width="757" height="1437" alt="Produto Frutatt Granola" loading="lazy" decoding="async">
+              </picture>
+            </div>
+          </div>
+          <h3 class="prod__name" id="p-granola">Granola</h3>
+        </article>
+
+        <article class="prod" role="listitem" data-prod="caju" data-from="center" aria-labelledby="p-caju">
+          <div class="prod__depth" data-depth="product">
+            <span class="shadow" aria-hidden="true"></span>
+            <div class="prod__float">
+              <span class="prod__leaf prod__leaf--a" aria-hidden="true"></span>
+              <span class="prod__leaf prod__leaf--b" aria-hidden="true"></span>
+              <picture class="prod__img">
+                <source type="image/avif" srcset="img/prod-caju-320.avif 320w, img/prod-caju-520.avif 520w, img/prod-caju-760.avif 757w" sizes="(max-width: 767px) 62vw, 26vw">
+                <img src="img/prod-caju-520.webp" srcset="img/prod-caju-320.webp 320w, img/prod-caju-520.webp 520w, img/prod-caju-760.webp 757w"
+                     sizes="(max-width: 767px) 62vw, 26vw" width="757" height="1437" alt="Garrafa de Suco Frutatt sabor Caju, 300 ml" loading="lazy" decoding="async">
+              </picture>
+            </div>
+          </div>
+          <h3 class="prod__name" id="p-caju">Caju</h3>
+        </article>
+
+        <article class="prod" role="listitem" data-prod="acai" data-from="right" aria-labelledby="p-acai">
+          <div class="prod__depth" data-depth="product">
+            <span class="shadow" aria-hidden="true"></span>
+            <div class="prod__float">
+              <span class="prod__leaf prod__leaf--b" aria-hidden="true"></span>
+              <picture class="prod__img">
+                <source type="image/avif" srcset="img/prod-acai-320.avif 320w, img/prod-acai-520.avif 520w, img/prod-acai-760.avif 760w" sizes="(max-width: 767px) 62vw, 26vw">
+                <img src="img/prod-acai-520.webp" srcset="img/prod-acai-320.webp 320w, img/prod-acai-520.webp 520w, img/prod-acai-760.webp 760w"
+                     sizes="(max-width: 767px) 62vw, 26vw" width="757" height="1437" alt="Produto Frutatt Açaí" loading="lazy" decoding="async">
+              </picture>
+            </div>
+          </div>
+          <h3 class="prod__name" id="p-acai">Açaí</h3>
+        </article>
+      </div>
+
+      <div class="products__band" data-depth="band" aria-hidden="true">
+        <picture>
+          <source type="image/avif" srcset="img/band-960.avif 960w, img/band-1920.avif 1672w" sizes="100vw">
+          <img src="img/band-960.webp" srcset="img/band-960.webp 960w, img/band-1920.webp 1672w" sizes="100vw"
+               width="1672" height="282" alt="" loading="lazy" decoding="async">
+        </picture>
+      </div>
+      <div class="products__near" data-leaves="near-products" aria-hidden="true"></div>
+    </section>
+
+    <!-- ───────── POR QUE ───────── -->
+    <section class="why" id="por-que" aria-labelledby="why-title">
+      <h2 id="why-title" class="why__title">Do rótulo para o copo.</h2>
+      <ul class="why__list">
+        <li class="why__item" data-reveal><strong>28%</strong><span>de fruta</span></li>
+        <li class="why__item" data-reveal><strong>Sem</strong><span>conservantes</span></li>
+        <li class="why__item" data-reveal><strong>0%</strong><span>açúcar</span></li>
+        <li class="why__item" data-reveal><strong>Vit. C</strong><span>fonte de vitamina C</span></li>
+      </ul>
+      <p class="why__note">Informações do rótulo do Suco Frutatt Caju 300 ml.</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© <span id="ano">2026</span> Frutatt</p>
+  </footer>
+
+  <script src="img/layers.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="main.js" defer></script>
+</body>
+</html>
