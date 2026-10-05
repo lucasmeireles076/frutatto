@@ -19,9 +19,25 @@
         imagesrcset="img/prod-caju-320.avif 320w, img/prod-caju-520.avif 520w, img/prod-caju-760.avif 757w" imagesizes="(max-width: 767px) 52vw, 400px">
 
   <link rel="stylesheet" href="styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Quanto de fruta tem no Suco Frutatt?", "acceptedAnswer": { "@type": "Answer", "text": "O Caju tem 28% de fruta, a Uva 35% de polpa e o Cajá 20% de polpa, conforme o rótulo." } },
+      { "@type": "Question", "name": "Tem açúcar ou conservantes?", "acceptedAnswer": { "@type": "Answer", "text": "O Caju é 0% açúcar, sem conservantes e fonte de vitamina C. O Cajá é zero açúcar e de baixa caloria." } },
+      { "@type": "Question", "name": "Onde posso comprar?", "acceptedAnswer": { "@type": "Answer", "text": "Em Recife, João Pessoa e Natal, ou pelo WhatsApp." } },
+      { "@type": "Question", "name": "Qual o tamanho da garrafa?", "acceptedAnswer": { "@type": "Answer", "text": "Caju, Uva e Cajá vêm na garrafinha de 300 ml." } }
+    ]
+  }
+  </script>
 </head>
 <body data-flavor="caju">
   <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.4-.3Z"/></symbol>
+  </svg>
 
   <header class="nav">
     <a class="nav__brand" href="#topo" aria-label="Suco Frutatt — início">Suco Frutatt</a>
@@ -143,7 +159,7 @@
         </article>
       </div>
 
-      <p class="products__more"><a class="btn btn--ghost" href="sabores.html">Ver todos os sabores</a></p>
+      <p class="products__more"><a class="btn btn--ghost" href="#peca">Escolher meu sabor</a></p>
 
       <div class="products__band" data-depth="band" aria-hidden="true">
         <picture>
@@ -153,6 +169,176 @@
         </picture>
       </div>
       <div class="products__near" data-leaves="near-products" aria-hidden="true"></div>
+    </section>
+
+    <!-- ───────── BENEFÍCIOS ───────── -->
+    <section class="benefits" id="beneficios" aria-labelledby="benefits-title">
+      <header class="section-head">
+        <p class="eyebrow">Por que Frutatt</p>
+        <h2 id="benefits-title" class="section-title">Fruta de verdade, <span class="accent">sem complicação.</span></h2>
+      </header>
+      <ul class="benefits__grid">
+        <li class="benefit" data-reveal>
+          <span class="benefit__icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><path d="M24 14c-7-6-17-2-17 8 0 10 8 20 17 20s17-10 17-20c0-10-10-14-17-8Z"/><path d="M24 14c0-4 2-8 6-10M24 14c-3-3-7-3-9-2"/></svg>
+          </span>
+          <h3>Sabor natural</h3>
+          <p>Polpa de verdade em cada garrafa: 28% no Caju, 35% na Uva, 20% no Cajá.</p>
+        </li>
+        <li class="benefit" data-reveal>
+          <span class="benefit__icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><path d="M19 4h10v6l3 5v27a2 2 0 0 1-2 2H18a2 2 0 0 1-2-2V15l3-5Z"/><path d="M16 22h16M16 34h16"/></svg>
+          </span>
+          <h3>Praticidade</h3>
+          <p>Garrafinha de 300 ml pronta para beber. Vai na bolsa, na lancheira e na praia.</p>
+        </li>
+        <li class="benefit" data-reveal>
+          <span class="benefit__icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><path d="M24 42S6 31 6 18a9 9 0 0 1 18-3 9 9 0 0 1 18 3c0 13-18 24-18 24Z"/><path d="M13 22h6l3-5 4 9 3-4h6"/></svg>
+          </span>
+          <h3>Mais leve no dia a dia</h3>
+          <p>Caju 0% açúcar e sem conservantes. Cajá zero açúcar e de baixa caloria.</p>
+        </li>
+        <li class="benefit" data-reveal>
+          <span class="benefit__icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><path d="M24 4v40M7 14l34 20M41 14 7 34"/><path d="m19 7 5 4 5-4M19 41l5-4 5 4M5 21l7-1-2-6M43 27l-7 1 2 6M5 27l7 1-2 6M43 21l-7-1 2-6"/></svg>
+          </span>
+          <h3>Frescor gelado</h3>
+          <p>Sabores do Nordeste feitos para tomar bem gelado. É só agitar e abrir.</p>
+        </li>
+      </ul>
+      <p class="section-cta" data-reveal>
+        <a class="btn btn--wa" data-contact="whatsapp" hidden><svg class="i-wa" aria-hidden="true"><use href="#i-wa"/></svg> Quero experimentar</a>
+      </p>
+    </section>
+
+    <!-- ───────── CARROSSEL / PEÇA O SEU ───────── -->
+    <section class="shop" id="peca" aria-labelledby="shop-title">
+      <header class="section-head">
+        <p class="eyebrow">Peça o seu</p>
+        <h2 id="shop-title" class="section-title">Escolha o sabor e <span class="accent">peça em um toque.</span></h2>
+      </header>
+
+      <div class="carousel" data-carousel aria-roledescription="carrossel" aria-label="Sabores Frutatt">
+        <div class="carousel__track" tabindex="0" role="list">
+          <article class="pcard" role="listitem" data-flavor="caju" aria-labelledby="pc-caju">
+            <div class="pcard__media">
+              <span class="pcard__bg" style="background-image: image-set(url('img/bg-960.avif') type('image/avif'), url('img/bg-960.webp') type('image/webp'))" aria-hidden="true"></span>
+              <span class="pcard__product" data-product>
+                <span class="shadow" aria-hidden="true"></span>
+                <span class="prod__float"><picture class="prod__img">
+                  <source type="image/avif" srcset="img/prod-caju-320.avif 320w, img/prod-caju-520.avif 520w" sizes="180px">
+                  <img src="img/prod-caju-320.webp" srcset="img/prod-caju-320.webp 320w, img/prod-caju-520.webp 520w" sizes="180px" width="757" height="1437" alt="Garrafa de Suco Frutatt sabor Caju, 300 ml" loading="lazy" decoding="async">
+                </picture></span>
+              </span>
+            </div>
+            <div class="pcard__body">
+              <h3 class="pcard__name" id="pc-caju">Caju</h3>
+              <p class="pcard__desc">O clássico do Nordeste, gelado.</p>
+              <ul class="pcard__chips"><li>28% de fruta</li><li>Sem conservantes</li><li>0% açúcar</li></ul>
+              <div class="pcard__ctas">
+                <a class="btn btn--wa pcard__wa" data-contact="whatsapp" data-msg="Olá! Quero pedir o Suco Frutatt Caju." hidden><svg class="i-wa" aria-hidden="true"><use href="#i-wa"/></svg> Pedir no WhatsApp</a>
+                <a class="pcard__more" href="caju.html">Saber mais <span aria-hidden="true">→</span></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="pcard" role="listitem" data-flavor="uva" aria-labelledby="pc-uva">
+            <div class="pcard__media">
+              <span class="pcard__bg" style="background-image: image-set(url('img/bg-uva-960.avif') type('image/avif'), url('img/bg-uva-960.webp') type('image/webp'))" aria-hidden="true"></span>
+              <span class="pcard__product" data-product>
+                <span class="shadow" aria-hidden="true"></span>
+                <span class="prod__float"><picture class="prod__img">
+                  <source type="image/avif" srcset="img/prod-uva-320.avif 320w, img/prod-uva-520.avif 520w" sizes="180px">
+                  <img src="img/prod-uva-320.webp" srcset="img/prod-uva-320.webp 320w, img/prod-uva-520.webp 520w" sizes="180px" width="757" height="1437" alt="Garrafa de Suco Frutatt sabor Uva, 300 ml" loading="lazy" decoding="async">
+                </picture></span>
+              </span>
+            </div>
+            <div class="pcard__body">
+              <h3 class="pcard__name" id="pc-uva">Uva</h3>
+              <p class="pcard__desc">Encorpado e intenso.</p>
+              <ul class="pcard__chips"><li>35% de polpa</li><li>300 ml</li></ul>
+              <div class="pcard__ctas">
+                <a class="btn btn--wa pcard__wa" data-contact="whatsapp" data-msg="Olá! Quero pedir o Suco Frutatt Uva." hidden><svg class="i-wa" aria-hidden="true"><use href="#i-wa"/></svg> Pedir no WhatsApp</a>
+                <a class="pcard__more" href="uva.html">Saber mais <span aria-hidden="true">→</span></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="pcard" role="listitem" data-flavor="caja" aria-labelledby="pc-caja">
+            <div class="pcard__media">
+              <span class="pcard__bg" style="background-image: image-set(url('img/bg-caja-960.avif') type('image/avif'), url('img/bg-caja-960.webp') type('image/webp'))" aria-hidden="true"></span>
+              <span class="pcard__tag">Zero açúcar</span>
+              <span class="pcard__product" data-product>
+                <span class="shadow" aria-hidden="true"></span>
+                <span class="prod__float"><picture class="prod__img">
+                  <source type="image/avif" srcset="img/prod-caja-320.avif 320w, img/prod-caja-520.avif 520w" sizes="180px">
+                  <img src="img/prod-caja-320.webp" srcset="img/prod-caja-320.webp 320w, img/prod-caja-520.webp 520w" sizes="180px" width="757" height="1437" alt="Garrafa de Suco Frutatt sabor Cajá, 300 ml" loading="lazy" decoding="async">
+                </picture></span>
+              </span>
+            </div>
+            <div class="pcard__body">
+              <h3 class="pcard__name" id="pc-caja">Cajá</h3>
+              <p class="pcard__desc">Zero açúcar, azedinho na medida.</p>
+              <ul class="pcard__chips"><li>Zero açúcar</li><li>20% de polpa</li><li>Baixa caloria</li></ul>
+              <div class="pcard__ctas">
+                <a class="btn btn--wa pcard__wa" data-contact="whatsapp" data-msg="Olá! Quero pedir o Suco Frutatt Cajá." hidden><svg class="i-wa" aria-hidden="true"><use href="#i-wa"/></svg> Pedir no WhatsApp</a>
+                <a class="pcard__more" href="caja.html">Saber mais <span aria-hidden="true">→</span></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="pcard" role="listitem" data-flavor="granola" aria-labelledby="pc-granola">
+            <div class="pcard__media">
+              <span class="pcard__bg" style="background-image: image-set(url('img/bg-granola-960.avif') type('image/avif'), url('img/bg-granola-960.webp') type('image/webp'))" aria-hidden="true"></span>
+              <span class="pcard__tag">Em breve</span>
+              <span class="pcard__product" data-product>
+                <span class="shadow" aria-hidden="true"></span>
+                <span class="prod__float"><picture class="prod__img">
+                  <source type="image/avif" srcset="img/prod-granola-320.avif 320w, img/prod-granola-520.avif 520w" sizes="180px">
+                  <img src="img/prod-granola-320.webp" srcset="img/prod-granola-320.webp 320w, img/prod-granola-520.webp 520w" sizes="180px" width="757" height="1437" alt="Produto Frutatt Granola" loading="lazy" decoding="async">
+                </picture></span>
+              </span>
+            </div>
+            <div class="pcard__body">
+              <h3 class="pcard__name" id="pc-granola">Granola</h3>
+              <p class="pcard__desc">Está chegando. Quer ser o primeiro a provar?</p>
+              <ul class="pcard__chips"><li>Lançamento</li></ul>
+              <div class="pcard__ctas">
+                <a class="btn btn--wa pcard__wa" data-contact="whatsapp" data-msg="Olá! Quero ser avisado quando o Frutatt Granola chegar." hidden><svg class="i-wa" aria-hidden="true"><use href="#i-wa"/></svg> Avise-me</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="pcard" role="listitem" data-flavor="acai" aria-labelledby="pc-acai">
+            <div class="pcard__media">
+              <span class="pcard__bg" style="background-image: image-set(url('img/bg-acai-960.avif') type('image/avif'), url('img/bg-acai-960.webp') type('image/webp'))" aria-hidden="true"></span>
+              <span class="pcard__tag">Em breve</span>
+              <span class="pcard__product" data-product>
+                <span class="shadow" aria-hidden="true"></span>
+                <span class="prod__float"><picture class="prod__img">
+                  <source type="image/avif" srcset="img/prod-acai-320.avif 320w, img/prod-acai-520.avif 520w" sizes="180px">
+                  <img src="img/prod-acai-320.webp" srcset="img/prod-acai-320.webp 320w, img/prod-acai-520.webp 520w" sizes="180px" width="757" height="1437" alt="Produto Frutatt Açaí" loading="lazy" decoding="async">
+                </picture></span>
+              </span>
+            </div>
+            <div class="pcard__body">
+              <h3 class="pcard__name" id="pc-acai">Açaí</h3>
+              <p class="pcard__desc">Está chegando. Quer ser o primeiro a provar?</p>
+              <ul class="pcard__chips"><li>Lançamento</li></ul>
+              <div class="pcard__ctas">
+                <a class="btn btn--wa pcard__wa" data-contact="whatsapp" data-msg="Olá! Quero ser avisado quando o Frutatt Açaí chegar." hidden><svg class="i-wa" aria-hidden="true"><use href="#i-wa"/></svg> Avise-me</a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="carousel__ui">
+          <button class="carousel__btn" type="button" data-dir="-1" aria-label="Sabor anterior">←</button>
+          <div class="carousel__dots" role="group" aria-label="Escolher sabor"></div>
+          <button class="carousel__btn" type="button" data-dir="1" aria-label="Próximo sabor">→</button>
+        </div>
+      </div>
     </section>
 
     <!-- ───────── POR QUE ───────── -->
@@ -166,6 +352,158 @@
       </ul>
       <p class="why__note">Informações do rótulo do Suco Frutatt Caju 300 ml.</p>
     </section>
+
+    <!-- ───────── ONDE ENCONTRAR ───────── -->
+    <section class="where" id="onde-encontrar" aria-labelledby="where-title">
+      <header class="section-head">
+        <p class="eyebrow">Onde encontrar</p>
+        <h2 id="where-title" class="section-title">Gelado perto de você em <span class="accent">três capitais.</span></h2>
+        <p class="section-lead">Recife, João Pessoa e Natal. Toque numa cidade para ver os pontos de venda.</p>
+      </header>
+
+      <div class="where__grid">
+        <figure class="where__map" data-reveal>
+          <svg viewBox="0 0 570 492" role="img" aria-labelledby="map-title">
+            <title id="map-title">Mapa do Nordeste com Recife, João Pessoa e Natal marcadas</title>
+            <defs>
+              <pattern id="sea-dots" width="14" height="14" patternUnits="userSpaceOnUse">
+                <circle cx="2" cy="2" r="1.3" fill="currentColor" opacity=".18"/>
+              </pattern>
+            </defs>
+            <rect class="map__sea" width="570" height="492" fill="url(#sea-dots)"/>
+            <path class="map__land" d="M-54,6 L12,18 L72,12 L120,30 L186,66 L228,102 L261,133.8 L300,147 L342,148.8 L372,153 L384,192 L397.8,232.8 L406.2,262.2 L408.6,273 L406.2,297 L403.8,327 L399,342 L387,378 L352.2,424.2 L312,474 L276,504 L252,540 L-54,540 Z"/>
+            <path class="map__state map__state--on" d="M261,133.8 L300,147 L342,148.8 L372,153 L384,192 L397.8,232.8 L372,231 L342,249 L306,261 L282,240 L258,255 L228,231 L198,234 L183,210 L198,180 L228,156 Z" data-state="natal"/>
+            <path class="map__state map__state--on" d="M397.8,232.8 L406.2,262.2 L408.6,273 L406.2,297 L378,291 L336,309 L294,336 L264,318 L228,300 L198,309 L177,282 L174,258 L183,210 L198,234 L228,231 L258,255 L282,240 L306,261 L342,249 L372,231 Z" data-state="joao-pessoa"/>
+            <path class="map__state map__state--on" d="M406.2,297 L403.8,327 L399,342 L387,378 L324,381 L282,402 L246,390 L204,402 L162,375 L120,387 L72,405 L42,378 L15,348 L24,312 L60,300 L96,288 L138,291 L177,282 L198,309 L228,300 L264,318 L294,336 L336,309 L378,291 Z" data-state="recife"/>
+            <path class="map__state" d="M387,378 L352.2,424.2 L312,474 L264,444 L228,426 L204,402 L246,390 L282,402 L324,381 Z"/>
+            <g class="map__uf" aria-hidden="true">
+              <text x="110" y="150">CE</text><text x="300" y="200">RN</text><text x="282" y="290">PB</text>
+              <text x="190" y="352">PE</text><text x="290" y="430">AL</text><text x="60" y="470">BA</text>
+              <text class="map__ocean" x="470" y="440">Oceano Atlântico</text>
+            </g>
+
+            <g class="pin" data-city="natal" transform="translate(383.4 191.4)" tabindex="0" role="button" aria-label="Ver pontos em Natal">
+              <circle class="pin__pulse" r="10"/><circle class="pin__pulse pin__pulse--late" r="10"/>
+              <path class="pin__drop" d="M0 0 C-4 -7 -11 -12 -11 -20 A11 11 0 1 1 11 -20 C11 -12 4 -7 0 0 Z"/>
+              <circle class="pin__hole" cy="-20" r="4.2"/>
+              <text class="pin__label" x="16" y="-12">Natal</text>
+            </g>
+            <g class="pin" data-city="joao-pessoa" transform="translate(404.4 271.2)" tabindex="0" role="button" aria-label="Ver pontos em João Pessoa">
+              <circle class="pin__pulse" r="10"/><circle class="pin__pulse pin__pulse--late" r="10"/>
+              <path class="pin__drop" d="M0 0 C-4 -7 -11 -12 -11 -20 A11 11 0 1 1 11 -20 C11 -12 4 -7 0 0 Z"/>
+              <circle class="pin__hole" cy="-20" r="4.2"/>
+              <text class="pin__label" x="16" y="-12">João Pessoa</text>
+            </g>
+            <g class="pin" data-city="recife" transform="translate(403.2 327)" tabindex="0" role="button" aria-label="Ver pontos em Recife">
+              <circle class="pin__pulse" r="10"/><circle class="pin__pulse pin__pulse--late" r="10"/>
+              <path class="pin__drop" d="M0 0 C-4 -7 -11 -12 -11 -20 A11 11 0 1 1 11 -20 C11 -12 4 -7 0 0 Z"/>
+              <circle class="pin__hole" cy="-20" r="4.2"/>
+              <text class="pin__label" x="16" y="-12">Recife</text>
+            </g>
+          </svg>
+          <figcaption class="where__legend"><span class="where__dot" aria-hidden="true"></span>Cidades com Suco Frutatt</figcaption>
+        </figure>
+
+        <div class="where__panel" data-reveal>
+          <div class="where__tabs" role="tablist" aria-label="Escolha a cidade">
+            <button class="where__tab" role="tab" id="tab-recife" data-city="recife" aria-selected="true" aria-controls="where-list">Recife <small>PE</small></button>
+            <button class="where__tab" role="tab" id="tab-joao-pessoa" data-city="joao-pessoa" aria-selected="false" aria-controls="where-list" tabindex="-1">João Pessoa <small>PB</small></button>
+            <button class="where__tab" role="tab" id="tab-natal" data-city="natal" aria-selected="false" aria-controls="where-list" tabindex="-1">Natal <small>RN</small></button>
+          </div>
+          <div class="where__list" id="where-list" role="tabpanel" aria-labelledby="tab-recife" aria-live="polite">
+            <!-- preenchido por main.js a partir de FRUTATT_PONTOS (config.js) -->
+            <p class="where__empty">Estamos em Recife, João Pessoa e Natal. Chame no WhatsApp para saber o ponto mais perto de você.</p>
+          </div>
+          <a class="btn btn--wa where__cta" data-contact="whatsapp" hidden>
+            <svg class="i-wa" aria-hidden="true"><use href="#i-wa"/></svg> Não achou? Peça no WhatsApp
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────── PROVA SOCIAL ───────── -->
+    <section class="social" id="instagram" aria-labelledby="social-title">
+      <header class="section-head">
+        <p class="eyebrow">No Instagram</p>
+        <h2 id="social-title" class="section-title">Gelado, colorido e <span class="accent">no seu feed.</span></h2>
+      </header>
+
+      <div class="ig" data-reveal>
+        <div class="ig__profile">
+          <span class="ig__avatar" aria-hidden="true"><span>F</span></span>
+          <div class="ig__who">
+            <strong data-contact-label="instagram">@frutattosuqo</strong>
+            <span>Suco Frutatt · fruta de verdade, bem gelada</span>
+          </div>
+          <a class="btn ig__follow" data-contact="instagram" hidden>Seguir</a>
+        </div>
+
+        <ul class="ig__grid" aria-label="Destaques do Instagram">
+          <li><a class="ig__tile ig__tile--photo" data-contact="instagram" style="--tile: url('img/bg-960.webp')" aria-label="Ver Caju no Instagram">
+            <span class="ig__caption"><strong>28%</strong> de fruta no Caju</span></a></li>
+          <li><a class="ig__tile" data-contact="instagram" data-flavor="caja" aria-label="Ver Cajá no Instagram">
+            <span class="ig__big">Zero<br>açúcar</span><span class="ig__caption">Cajá, azedinho na medida</span></a></li>
+          <li><a class="ig__tile ig__tile--photo" data-contact="instagram" style="--tile: url('img/bg-uva-960.webp')" aria-label="Ver Uva no Instagram">
+            <span class="ig__caption"><strong>35%</strong> de polpa na Uva</span></a></li>
+          <li><a class="ig__tile" data-contact="instagram" data-flavor="caju" aria-label="Ver dica no Instagram">
+            <span class="ig__big">Agite<br>antes!</span><span class="ig__caption">E sirva bem gelado</span></a></li>
+          <li><a class="ig__tile ig__tile--photo" data-contact="instagram" style="--tile: url('img/bg-caja-960.webp')" aria-label="Ver Cajá no Instagram">
+            <span class="ig__caption">Garrafinha de <strong>300 ml</strong></span></a></li>
+          <li><a class="ig__tile" data-contact="instagram" data-flavor="uva" aria-label="Ver novidades no Instagram">
+            <span class="ig__big">Vem<br>novidade</span><span class="ig__caption">Granola e Açaí em breve</span></a></li>
+        </ul>
+      </div>
+
+      <!-- depoimentos reais entram por FRUTATT_DEPOIMENTOS (config.js); vazio = bloco escondido -->
+      <ul class="quotes" data-quotes hidden></ul>
+    </section>
+
+    <!-- ───────── FAQ ───────── -->
+    <section class="faq" id="duvidas" aria-labelledby="faq-title">
+      <header class="section-head">
+        <p class="eyebrow">Dúvidas</p>
+        <h2 id="faq-title" class="section-title">Antes de pedir, <span class="accent">a gente responde.</span></h2>
+      </header>
+      <div class="faq__list">
+        <details class="faq__item" name="faq" data-reveal open>
+          <summary>Quanto de fruta tem no Suco Frutatt?</summary>
+          <div class="faq__body"><p>Está no rótulo de cada sabor: o Caju tem 28% de fruta, a Uva 35% de polpa e o Cajá 20% de polpa.</p></div>
+        </details>
+        <details class="faq__item" name="faq" data-reveal>
+          <summary>Tem açúcar ou conservantes?</summary>
+          <div class="faq__body"><p>O Caju é 0% açúcar, sem conservantes e fonte de vitamina C. O Cajá é zero açúcar e de baixa caloria. Cada garrafa traz a informação completa no rótulo.</p></div>
+        </details>
+        <details class="faq__item" name="faq" data-reveal>
+          <summary>Onde posso comprar?</summary>
+          <div class="faq__body"><p>Em Recife, João Pessoa e Natal. Veja os pontos em <a href="#onde-encontrar">Onde encontrar</a> ou peça direto pelo WhatsApp.</p></div>
+        </details>
+        <details class="faq__item" name="faq" data-reveal>
+          <summary>Como faço o pedido pelo WhatsApp?</summary>
+          <div class="faq__body"><p>Toque em “Pedir no WhatsApp”, diga o sabor e a quantidade. A gente responde com os valores e como você recebe o seu pedido.</p></div>
+        </details>
+        <details class="faq__item" name="faq" data-reveal>
+          <summary>Vocês vendem para revenda?</summary>
+          <div class="faq__body"><p>Sim. Mercados, empórios e lanchonetes podem chamar no WhatsApp contando o nome do negócio e a cidade.</p></div>
+        </details>
+        <details class="faq__item" name="faq" data-reveal>
+          <summary>Qual o tamanho da garrafa?</summary>
+          <div class="faq__body"><p>Caju, Uva e Cajá vêm na garrafinha de 300 ml: cabe na bolsa, na lancheira e no isopor da praia.</p></div>
+        </details>
+        <details class="faq__item" name="faq" data-reveal>
+          <summary>Precisa agitar antes de beber?</summary>
+          <div class="faq__body"><p>Sim! A polpa assenta no fundo, então agite antes de abrir e sirva bem gelado.</p></div>
+        </details>
+      </div>
+    </section>
+
+    <!-- ───────── CTA FINAL ───────── -->
+    <section class="closer" aria-labelledby="closer-title">
+      <h2 id="closer-title" class="closer__title" data-reveal>Bateu a sede de fruta?</h2>
+      <p class="closer__lead" data-reveal>Escolha o sabor, mande uma mensagem e a gente cuida do resto.</p>
+      <a class="btn btn--wa btn--lg" data-contact="whatsapp" hidden data-reveal>
+        <svg class="i-wa" aria-hidden="true"><use href="#i-wa"/></svg> Pedir no WhatsApp
+      </a>
+    </section>
   </main>
 
   <footer class="footer">
@@ -175,8 +513,10 @@
     </div>
     <p>© 2026 Frutatt</p>
   </footer>
-  <a class="wa-fab" data-contact="whatsapp" hidden aria-label="Fale com a Frutatt no WhatsApp">
-    <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.4-.3Z"/></svg>
+  <a class="wa-fab" data-contact="whatsapp" hidden aria-label="Pedir no WhatsApp">
+    <span class="wa-fab__ring" aria-hidden="true"></span>
+    <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.4-.3Z"/></svg>
+    <span class="wa-fab__label">Pedir agora</span>
   </a>
 
   <script src="config.js"></script>

@@ -10,7 +10,15 @@ Landing page do Suco Frutatt com motion design (GSAP + ScrollTrigger).
 
 ## Instagram e WhatsApp
 Preencha `site/config.js`. Todos os botões/links (menu, hero, rodapé, botão flutuante) aparecem sozinhos;
-vazio = escondido.
+vazio = escondido. `whatsappLink` (link do WhatsApp Business) tem prioridade sobre o número.
+
+## Seções da home (conversão)
+Hero → Produtos → Benefícios → Carrossel "Peça o seu" → Rótulo → Onde encontrar (mapa) →
+Instagram/depoimentos → FAQ → CTA final, com botão de WhatsApp fixo em todas as páginas.
+
+Conteúdo editável sem mexer no HTML, em `site/config.js`:
+- `FRUTATT_PONTOS` — pontos de venda de Recife, João Pessoa e Natal (os atuais são **exemplos**: troque antes de publicar)
+- `FRUTATT_DEPOIMENTOS` — depoimentos reais de clientes; vazio = bloco escondido
 
 ## Estrutura
 - `site/` — o site (sirva a pasta: `python -m http.server -d site` e abra http://localhost:8000)

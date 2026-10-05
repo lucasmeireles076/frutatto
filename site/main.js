@@ -23,9 +23,11 @@
   const C = window.FRUTATT_CONTACT || {};
   const ig = (C.instagram || '').replace(/^@/, '').trim();
   const wa = (C.whatsapp || '').replace(/\D/g, '');
+  const waLink = (C.whatsappLink || '').trim(); // Business short link wins; it can't carry a prefilled text
   $$('[data-contact]').forEach((a) => {
     const kind = a.dataset.contact;
     if (kind === 'instagram' && ig) a.href = `https://instagram.com/${ig}`;
+    else if (kind === 'whatsapp' && waLink) a.href = waLink;
     else if (kind === 'whatsapp' && wa) {
       a.href = `https://wa.me/${wa}` + (a.dataset.msg ? `?text=${encodeURIComponent(a.dataset.msg)}` : '');
     } else return;
@@ -34,8 +36,130 @@
     a.hidden = false;
   });
   $$('[data-contact-label="instagram"]').forEach((s) => (s.textContent = ig ? `@${ig}` : ''));
-  $$('[data-contact-label="whatsapp"]').forEach((s) => (s.textContent = wa ? `+${wa}` : ''));
-  $$('[data-contact-empty]').forEach((p) => (p.hidden = Boolean(ig || wa)));
+  $$('[data-contact-label="whatsapp"]').forEach((s) => (s.textContent = wa ? `+${wa}` : waLink ? 'Chamar agora' : ''));
+  $$('[data-contact-empty]').forEach((p) => (p.hidden = Boolean(ig || wa || waLink)));
+
+  const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
+
+  /* ── product carousel: native scroll-snap + arrows, dots and mouse drag ── */
+  $$('[data-carousel]').forEach((car) => {
+    const track = $('.carousel__track', car);
+    const items = [...track.children];
+    const dots = $('.carousel__dots', car);
+    const [prev, next] = $$('.carousel__btn', car);
+    const step = () => items[1].offsetLeft - items[0].offsetLeft;
+    const goTo = (i) => track.scrollTo({ left: items[Math.max(0, Math.min(items.length - 1, i))].offsetLeft - items[0].offsetLeft, behavior: 'smooth' });
+
+    const dotBtns = items.map((item, i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('aria-label', `Ir para ${$('h3', item).textContent}`);
+      b.addEventListener('click', () => goTo(i));
+      dots.append(b);
+      return b;
+    });
+    let current = -1;
+    const sync = () => {
+      const max = track.scrollWidth - track.clientWidth;
+      const i = track.scrollLeft >= max - 4 ? items.length - 1 : Math.round(track.scrollLeft / step());
+      prev.disabled = track.scrollLeft <= 4;
+      next.disabled = track.scrollLeft >= max - 4;
+      if (i === current) return;
+      current = i;
+      dotBtns.forEach((b, j) => b.setAttribute('aria-current', String(j === i)));
+    };
+    let raf = 0;
+    track.addEventListener('scroll', () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(sync); }, { passive: true });
+    window.addEventListener('resize', sync);
+    prev.addEventListener('click', () => goTo(current - 1));
+    next.addEventListener('click', () => goTo(current + 1));
+    sync();
+
+    // desktop: click-and-drag like a phone swipe (touch already scrolls natively)
+    let startX = 0, startLeft = 0, moved = false;
+    track.addEventListener('pointerdown', (e) => {
+      if (e.pointerType !== 'mouse' || e.button !== 0) return;
+      startX = e.clientX; startLeft = track.scrollLeft; moved = false;
+      const onMove = (ev) => {
+        const dx = ev.clientX - startX;
+        if (!moved && Math.abs(dx) > 6) { moved = true; track.classList.add('is-dragging'); }
+        if (moved) track.scrollLeft = startLeft - dx;
+      };
+      const onUp = () => {
+        window.removeEventListener('pointermove', onMove);
+        if (moved) { track.classList.remove('is-dragging'); goTo(Math.round(track.scrollLeft / step())); }
+      };
+      window.addEventListener('pointermove', onMove);
+      window.addEventListener('pointerup', onUp, { once: true });
+    });
+    track.addEventListener('dragstart', (e) => e.preventDefault());
+    track.addEventListener('click', (e) => { if (moved) { e.preventDefault(); e.stopPropagation(); } }, true);
+  });
+
+  /* ── "Onde encontrar": city tabs + map pins share one selection ── */
+  const where = $('.where');
+  if (where) {
+    const PONTOS = window.FRUTATT_PONTOS || {};
+    const NAMES = { recife: 'Recife', 'joao-pessoa': 'João Pessoa', natal: 'Natal' };
+    const list = $('.where__list', where);
+    const tabs = $$('.where__tab', where);
+    const PIN_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>';
+
+    const select = (city, focusTab) => {
+      tabs.forEach((t) => {
+        const on = t.dataset.city === city;
+        t.setAttribute('aria-selected', String(on));
+        t.tabIndex = on ? 0 : -1;
+        if (on) { list.setAttribute('aria-labelledby', t.id); if (focusTab) t.focus(); }
+      });
+      $$('.pin', where).forEach((p) => p.classList.toggle('is-active', p.dataset.city === city));
+      $$('.map__state[data-state]', where).forEach((s) => s.classList.toggle('is-active', s.dataset.state === city));
+      const spots = PONTOS[city] || [];
+      list.innerHTML = spots.length
+        ? `<ul class="where__spots">${spots.map((s, i) => `
+            <li class="spot" style="--i:${i}">
+              <span class="spot__icon">${PIN_ICON}</span>
+              <span><strong>${esc(s.nome)}</strong><span>${esc(s.bairro)} · ${NAMES[city]}</span></span>
+              ${s.tipo ? `<span class="spot__type">${esc(s.tipo)}</span>` : ''}
+            </li>`).join('')}</ul>`
+        : `<p class="where__empty">Já estamos em ${NAMES[city]}! Chame no WhatsApp e a gente indica o ponto mais perto de você.</p>`;
+    };
+
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', () => select(t.dataset.city));
+      t.addEventListener('keydown', (e) => {
+        const d = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
+        if (d) select(tabs[(i + d + tabs.length) % tabs.length].dataset.city, true);
+      });
+    });
+    $$('.pin', where).forEach((p) => {
+      p.addEventListener('click', () => select(p.dataset.city));
+      p.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(p.dataset.city); }
+      });
+    });
+    select('recife');
+
+    // pins drop in the first time the map is on screen
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(([e]) => {
+        if (e.isIntersecting) { where.classList.add('is-in'); io.disconnect(); }
+      }, { threshold: 0.3 });
+      io.observe($('.where__map', where));
+    } else where.classList.add('is-in');
+  }
+
+  /* ── testimonials from config.js (real customers only) ── */
+  const quotes = $('[data-quotes]');
+  const DEP = window.FRUTATT_DEPOIMENTOS || [];
+  if (quotes && DEP.length) {
+    quotes.innerHTML = DEP.map((d) => `
+      <li><blockquote class="quote" data-reveal>
+        <p>“${esc(d.texto)}”</p>
+        <footer><strong>${esc(d.nome)}</strong>${d.cidade ? ` · ${esc(d.cidade)}` : ''}${d.usuario ? ` · ${esc(d.usuario)}` : ''}</footer>
+      </blockquote></li>`).join('');
+    quotes.hidden = false;
+  }
 
   /* ── layers cut from the original art by build_assets.py ── */
   const LAYERS = window.FRUTATT_LAYERS || { leaves: [] };
